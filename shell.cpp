@@ -6,6 +6,7 @@
 #include <stdlib.h>     /* exit, EXIT_FAILURE */
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "utils.cpp"
 using namespace std;
 int main()
@@ -40,6 +41,8 @@ int main()
 
         // add the command to history
         hisvec.push_back(line);
+        // save history to file
+        ofstream outfile("history.txt");
 
         // tokenize the input into argv-style array
         const int MAXARGS = 64;
@@ -56,23 +59,15 @@ int main()
         }
         argv[argc] = NULL;
 
-        // fork a child to execute the command
-        pid_t pid = fork();
-        if (pid < 0) {
-            perror("fork");
-            continue;
+        // Convert argv to vector<string> for runCommand
+        vector<string> cmdArgs;
+        for (int i = 0; argv[i] != NULL; i++) {
+            cmdArgs.push_back(string(argv[i]));
         }
-        if (pid == 0) {
-            // child process
-            execvp(argv[0], argv);
-            // if execvp returns, an error occurred
-            perror("execvp");
-            exit(EXIT_FAILURE);
-        } else {
-            // parent waits for child to finish
-            int status;
-            waitpid(pid, &status, 0);
-        }
+
+        // Execute command using runCommand utility
+        string output = runCommand(cmdArgs);
+        cout << output;
     }
 
     cout << "Exiting shell.\n";
