@@ -1,0 +1,12 @@
+ls
+test
+ls
+cd ..
+mkdir to
+cd to
+ls
+cd to
+rm -f to
+rm -rf to
+ls
+help
