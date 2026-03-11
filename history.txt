@@ -1,0 +1,10 @@
+pwd
+ls
+echo hello world
+echo this should go into a file > out.txt
+cat out.txt
+echo another line >> out.txt
+cat out.txt
+cat < out.txt
+ls | wc
+echo testing pipes | wc

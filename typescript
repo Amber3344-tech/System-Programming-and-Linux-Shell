@@ -1,0 +1,44 @@
+Script started on 2026-03-11 14:52:05-05:00 [TERM="xterm-256color" TTY="/dev/pts/7" COLUMNS="117" LINES="9"]
+[?2004h]0;kuhna4273@eStout-G418107M: ~/System-Programming-and-Linux-Shell[01;32mkuhna4273@eStout-G418107M[00m:[01;34m~/System-Programming-and-Linux-Shell[00m$ code .[4Plscd PiSense_Frontend/..[K[3Plscode .d PiSense_Backend/ls[Kcd PiSense_Backend/ode .[K[4Plscd ..PiSense_Frontend/ls[Kcode .[Kg++ shell.cpp o shell
+[?2004l/usr/bin/ld: cannot find o: No such file or directory
+/usr/bin/ld: shell: stdout: invalid version 2 (max 0)
+/usr/bin/ld: shell: error adding symbols: bad value
+collect2: error: ld returned 1 exit status
+[?2004h]0;kuhna4273@eStout-G418107M: ~/System-Programming-and-Linux-Shell[01;32mkuhna4273@eStout-G418107M[00m:[01;34m~/System-Programming-and-Linux-Shell[00m$ g++ shell.cpp o shell[1@-
+[?2004l[?2004h]0;kuhna4273@eStout-G418107M: ~/System-Programming-and-Linux-Shell[01;32mkuhna4273@eStout-G418107M[00m:[01;34m~/System-Programming-and-Linux-Shell[00m$ ./shell <in[K[K input.e[Ktxt
+[?2004l/home/kuhna4273/System-Programming-and-Linux-Shell> /home/kuhna4273/System-Programming-and-Linux-Shell
+/home/kuhna4273/System-Programming-and-Linux-Shell> README.md
+history.txt
+input.txt
+shell
+shell.cpp
+typescript
+utils.cpp
+/home/kuhna4273/System-Programming-and-Linux-Shell> hello world
+/home/kuhna4273/System-Programming-and-Linux-Shell> 1 pwd
+2 ls
+3 echo hello world
+/home/kuhna4273/System-Programming-and-Linux-Shell> /home/kuhna4273/System-Programming-and-Linux-Shell> this should go into a file
+/home/kuhna4273/System-Programming-and-Linux-Shell> /home/kuhna4273/System-Programming-and-Linux-Shell> this should go into a file
+another line
+/home/kuhna4273/System-Programming-and-Linux-Shell> this should go into a file
+another line
+/home/kuhna4273/System-Programming-and-Linux-Shell>       8       8      77
+/home/kuhna4273/System-Programming-and-Linux-Shell>       1       2      14
+/home/kuhna4273/System-Programming-and-Linux-Shell> 1 pwd
+2 ls
+3 echo hello world
+4 echo this should go into a file > out.txt
+5 cat out.txt
+6 echo another line >> out.txt
+7 cat out.txt
+8 cat < out.txt
+9 ls | wc
+10 echo testing pipes | wc
+/home/kuhna4273/System-Programming-and-Linux-Shell> Exiting shell.
+[?2004h]0;kuhna4273@eStout-G418107M: ~/System-Programming-and-Linux-Shell[01;32mkuhna4273@eStout-G418107M[00m:[01;34m~/System-Programming-and-Linux-Shell[00m$ exit[K[K[K[Kend
+[?2004lCommand 'end' not found, but there are 14 similar ones.
+[?2004h]0;kuhna4273@eStout-G418107M: ~/System-Programming-and-Linux-Shell[01;32mkuhna4273@eStout-G418107M[00m:[01;34m~/System-Programming-and-Linux-Shell[00m$ exit
+[?2004lexit
+
+Script done on 2026-03-11 14:53:12-05:00 [COMMAND_EXIT_CODE="127"]
