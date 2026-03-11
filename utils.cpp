@@ -3,6 +3,7 @@
 #include <fstream>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <iostream>
 using namespace std;
 
 vector<string> gethistory(string filename) {
@@ -29,7 +30,7 @@ string printWorkingDirectory() {
 // execute a command via fork/execvp and capture its output through a pipe
 string runCommand(const vector<string>& args) {
             // string comparison to check for "exit" command
-
+            
     if (args.empty())
         return string();
 

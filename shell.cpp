@@ -23,7 +23,9 @@ int main()
     while (true)
     {
         // Display current working directory as the shell prompt
-        cout << runCommand({"pwd"}) << "> ";
+        string cwd = runCommand({"pwd"});
+        cwd.pop_back();
+        cout << cwd << "> ";
 
         // Read command line input from the user
         if (!getline(cin, line))
@@ -57,10 +59,7 @@ int main()
         for (const auto& cmd : hisvec)
             outfile << cmd << endl;
 
-        // -----------------------------
         // TOKENIZE THE USER COMMAND
-        // -----------------------------
-
         const int MAXARGS = 64;
         char *argv[MAXARGS];
         int argc = 0;
@@ -78,13 +77,12 @@ int main()
         }
         argv[argc] = NULL;
 
-        // -----------------------------
-        // DETECT SPECIAL OPERATORS
-        // -----------------------------
 
+        // DETECT SPECIAL OPERATORS
         bool redirectOut = false;
         bool redirectIn = false;
         bool hasPipe = false;
+        bool appendOut = false;
 
         string outfileName = "";
         string infileName = "";
@@ -117,6 +115,13 @@ int main()
                 argv[i] = NULL;   // split command into two parts
                 break;
             }
+            if (string(argv[i]) == ">>") {
+                redirectOut = true;
+                appendOut = true;
+                outfileName = argv[i+1];
+                argv[i] = NULL;
+                break;
+            }
         }
 
         // Convert arguments to vector<string> for runCommand()
@@ -124,13 +129,18 @@ int main()
         for (int i = 0; argv[i] != NULL; i++)
             cmdArgs.push_back(string(argv[i]));
 
-        // -----------------------------
+
         // OUTPUT REDIRECTION ( > )
-        // -----------------------------
         if (redirectOut) {
 
             // Open or create output file
-            int fd = open(outfileName.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0666);
+            int fd;
+
+            if (appendOut)
+                fd = open(outfileName.c_str(), O_WRONLY | O_CREAT | O_APPEND, 0666);
+            else
+                fd = open(outfileName.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0666);
+
 
             // Save current stdout
             int saved = dup(STDOUT_FILENO);
@@ -139,7 +149,8 @@ int main()
             dup2(fd, STDOUT_FILENO);
 
             // Execute command
-            runCommand(cmdArgs);
+            string output = runCommand(cmdArgs);
+            cout << output;
 
             // Restore stdout back to terminal
             fflush(stdout);
@@ -149,9 +160,7 @@ int main()
             close(saved);
         }
 
-        // -----------------------------
         // INPUT REDIRECTION ( < )
-        // -----------------------------
         else if (redirectIn) {
 
             // Open input file
@@ -174,9 +183,7 @@ int main()
             close(saved);
         }
 
-        // -----------------------------
         // PIPE OPERATION ( command1 | command2 )
-        // -----------------------------
         else if (hasPipe) {
 
             int fd[2];
@@ -230,9 +237,8 @@ int main()
             continue;
         }
 
-        // -----------------------------
+
         // NORMAL COMMAND EXECUTION
-        // -----------------------------
         else {
 
             // Execute command normally using fork/exec
